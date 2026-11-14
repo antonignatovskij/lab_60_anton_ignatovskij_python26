@@ -1,0 +1,1 @@
+from shop_app.views.products import ProductsView

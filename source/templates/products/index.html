@@ -1,0 +1,59 @@
+{% extends "base.html" %}
+
+{% block content %}
+    <section aria-labelledby="catalog-title">
+        <div class="d-flex flex-wrap align-items-center justify-content-between gap-3 mb-4">
+            <div>
+                <h1 id="catalog-title" class="h2 fw-bold mb-2">Каталог товаров</h1>
+                <p class="text-body-secondary mb-0">Все товары нашего магазина в одном месте.</p>
+            </div>
+            <span class="badge rounded-pill bg-white border text-body-secondary px-3 py-2">
+                Товаров: {{ products|length }}
+            </span>
+        </div>
+
+        <div class="row row-cols-1 row-cols-sm-2 row-cols-lg-3 row-cols-xl-4 g-4">
+            {% for product in products %}
+                <div class="col">
+                    <article class="card h-100 border-0 rounded-4 shadow-sm overflow-hidden">
+                        <div class="ratio ratio-4x3 bg-white border-bottom">
+                            {% if product.image %}
+                                <img src="{{ product.image }}"
+                                     alt="{{ product.name }}"
+                                     class="img-thumbnail border-0">
+                            {% else %}
+                                <div class="d-flex align-items-center justify-content-center bg-body-tertiary text-body-secondary">
+                                    Нет изображения
+                                </div>
+                            {% endif %}
+                        </div>
+
+                        <div class="card-body d-flex flex-column p-4">
+                            <span class="badge rounded-pill bg-primary-subtle text-primary-emphasis align-self-start text-wrap mb-3">
+                                {{ product.category.name }}
+                            </span>
+                            <h2 class="card-title h5 fw-semibold text-break mb-2">{{ product.name }}</h2>
+                            <div class="mt-auto pt-3 border-top">
+                                <div class="text-body-secondary small mb-1">Цена</div>
+                                <div class="fs-4 fw-bold text-dark">{{ product.cost }}</div>
+                            </div>
+                        </div>
+
+                        <div class="card-footer bg-white border-0 px-4 pb-4 pt-0 small text-body-secondary">
+                            Добавлено: <time datetime="{{ product.created_at|date:'c' }}">{{ product.created_at }}</time>
+                        </div>
+                    </article>
+                </div>
+            {% empty %}
+                <div class="col-12 w-100">
+                    <div class="card border-0 rounded-4 shadow-sm text-center py-5">
+                        <div class="card-body px-4 py-4">
+                            <h2 class="h4 fw-semibold mb-3">Пока нет товаров</h2>
+                            <p class="text-body-secondary mb-0">Здесь появятся товары, когда они будут добавлены в магазин.</p>
+                        </div>
+                    </div>
+                </div>
+            {% endfor %}
+        </div>
+    </section>
+{% endblock %}

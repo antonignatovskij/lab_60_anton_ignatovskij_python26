@@ -20,7 +20,7 @@
         <div class="d-flex flex-wrap align-items-center gap-3">
             <a class="nav-link" href="{% url 'products_list' %}">Проекты</a>
             {% block nav %}
-            <a class="nav-link" href="{% url '#' %}">Создать проект</a>
+            <a class="nav-link" href="{% url 'products_list' %}">Создать проект</a>
             {% endblock %}
         </div>
     </nav>
