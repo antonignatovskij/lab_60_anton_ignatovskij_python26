@@ -7,7 +7,7 @@ class ProductForm(forms.Form):
     name = forms.CharField(
         max_length=200,
         required=True,
-        label='Название Товара',
+        label='Наименование Товара',
         widget=forms.TextInput(attrs={'class': 'form-control'})
     )
 
@@ -43,5 +43,16 @@ class ProductForm(forms.Form):
 
 class CategoryForm(forms.Form):
     name = forms.CharField(
-        max_length=200,
+        max_length=60,
+        required=True,
+        label='Наименование Категеории',
+        widget=forms.TextInput(attrs={'class': 'form-control'})
     )
+
+    description = forms.CharField(
+        max_length=500,
+        required=False,
+        label='Описание категории',
+        widget=forms.Textarea(attrs={'class': 'form-control', 'rows': '5', 'cols': '50'})
+    )
+

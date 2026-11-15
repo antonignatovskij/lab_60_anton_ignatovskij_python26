@@ -1,10 +1,14 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Title</title>
-</head>
-<body>
+{% extends "base.html" %}
 
-</body>
-</html>
+{% block content %}
+    <div class="row justify-content-center">
+        <div class="card border-0 shadow-sm p-4 col-md-8 col-lg-6">
+            <h1 class="h4 mb-3">Удалить категорию?</h1>
+            {% include 'partial/delete_form.html' %}
+            <div class="d-flex flex-wrap gap-2 mt-2">
+                <a href="{% url 'category_list' %}" class="btn btn-outline-secondary">Отмена</a>
+                <button type="submit" form="delete-form" class="btn btn-danger">Удалить категорию</button>
+            </div>
+        </div>
+    </div>
+{% endblock %}

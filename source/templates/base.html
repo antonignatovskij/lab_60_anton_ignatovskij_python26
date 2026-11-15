@@ -19,8 +19,13 @@
         </a>
         <div class="d-flex flex-wrap align-items-center gap-3">
             <a class="nav-link" href="{% url 'product_list' %}">Каталог</a>
+            <a class="nav-link-active text-decoration-none" href="{% url 'category_list' %}">Категории</a>
             {% block nav %}
-            <a class="btn btn-danger" href="{% url 'product_create' %}">Добавить товар</a>
+                <a class="btn btn-danger" href="{% url 'product_create' %}">Добавить товар</a>
+            {% endblock %}
+
+            {% block nav_cat %}
+                <a class="btn btn-secondary" href="{% url 'category_create' %}">Добавить категорию</a>
             {% endblock %}
         </div>
     </nav>

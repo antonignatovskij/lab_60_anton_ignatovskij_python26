@@ -1,10 +1,28 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Title</title>
-</head>
-<body>
+{% extends "base.html" %}
 
-</body>
-</html>
+{% block content %}
+<div class="d-flex flex-wrap justify-content-between align-items-center gap-3 mb-4">
+    <h1 class="h3 mb-0">Список категорий</h1>
+</div>
+
+<div class="row g-4">
+    {% for category in categories %}
+    <div class="">
+        <article class="card h-100 border-0 rounded-3 shadow-sm">
+            <div class="card-body">
+                <h2 class="h5 text-break">{{ category.name }}</h2>
+                <p class="text-secondary mb-0">{{ category.description }}</p>
+            </div>
+            <div class="p-3 mt-auto">
+                <div class="d-flex flex-wrap gap-2">
+                    <a class="btn btn-sm btn-outline-secondary" href="{% url 'category_update' category.pk %}">Редактировать</a>
+                    <a class="btn btn-sm btn-outline-danger" href="{% url 'category_delete' category.pk %}">Удалить</a>
+                </div>
+            </div>
+        </article>
+    </div>
+    {% empty %}
+    <p class="text-muted py-5 text-center">Пока нет категорий. Добавьте первую!</p>
+    {% endfor %}
+</div>
+{% endblock %}

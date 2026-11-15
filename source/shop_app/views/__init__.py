@@ -5,3 +5,10 @@ from shop_app.views.products import (
     ProductUpdateView,
     ProductDeleteView
 )
+
+from shop_app.views.categories import (
+    CategoriesView,
+    CategoryCreateView,
+    CategoryUpdateView,
+    CategoryDeleteView
+)

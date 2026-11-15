@@ -26,7 +26,6 @@ class ProductDetailView(TemplateView):
 
 
 class ProductCreateView(TemplateView):
-    model = Product
     template_name = 'products/create.html'
 
     def get_context_data(self, **kwargs: Any):
@@ -44,7 +43,6 @@ class ProductCreateView(TemplateView):
         return self.render_to_response(context)
 
 class ProductUpdateView(TemplateView):
-    model = Product
     template_name = 'products/update.html'
 
     def get_context_data(self, **kwargs):
