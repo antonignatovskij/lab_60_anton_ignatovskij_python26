@@ -2,6 +2,7 @@
 .venv
 virtualenv
 __pycache__
+*.md
 *.pyc
 .idea
 .vscode

@@ -27,6 +27,7 @@ class ProductForm(forms.Form):
     )
 
     cost = forms.DecimalField(
+        min_value=0.01,
         max_digits=7,
         decimal_places=2,
         required=True,
@@ -34,7 +35,7 @@ class ProductForm(forms.Form):
         widget=forms.NumberInput(attrs={'class': 'form-control'})
     )
 
-    image = forms.CharField(
+    image = forms.URLField(
         required=True,
         label='Ссылка на изображение',
         widget=forms.TextInput(attrs={'class': 'form-control'})
