@@ -1,0 +1,8 @@
+<form method="post" class="border-0 shadow-sm p-4" id="delete-form">
+    {% csrf_token %}
+    <p class="text-muted">Вы собираетесь удалить:</p>
+    <p class="fw-semibold text-break">{{ object.name }}</p>
+    <p class="small text-muted">Это действие нельзя отменить.</p>
+
+
+</form>

@@ -1,0 +1,47 @@
+from django import forms
+
+from shop_app.models import Category
+
+
+class ProductForm(forms.Form):
+    name = forms.CharField(
+        max_length=200,
+        required=True,
+        label='Название Товара',
+        widget=forms.TextInput(attrs={'class': 'form-control'})
+    )
+
+    description = forms.CharField(
+        max_length=500,
+        required=False,
+        label='Описание товара',
+        widget=forms.Textarea(attrs={'class': 'form-control', 'rows': '5', 'cols': '50'})
+    )
+
+    category = forms.ModelChoiceField(
+        queryset=Category.objects.all(),
+        required=True,
+        label='Выберите категорию',
+        empty_label='Выберите категорию',
+        widget=forms.Select(attrs={'class': 'form-control'})
+    )
+
+    cost = forms.DecimalField(
+        max_digits=7,
+        decimal_places=2,
+        required=True,
+        label='Цена',
+        widget=forms.NumberInput(attrs={'class': 'form-control'})
+    )
+
+    image = forms.CharField(
+        required=True,
+        label='Ссылка на изображение',
+        widget=forms.TextInput(attrs={'class': 'form-control'})
+    )
+
+
+class CategoryForm(forms.Form):
+    name = forms.CharField(
+        max_length=200,
+    )

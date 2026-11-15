@@ -1,0 +1,14 @@
+{% extends "base.html" %}
+
+{% block content %}
+    <div class="card p-3 rounded-3">
+        {% include 'partial/product_form.html' %}
+        <div class="d-flex flex-wrap gap-2 border-top pt-3 mt-3">
+            <button type="submit" form="product-form" class="btn btn-primary">Создать</button>
+        </div>
+    </div>
+
+{% endblock %}
+
+
+<!--            <a class="btn btn-outline-secondary btn-sm" href="{% url 'projects_detail' project.pk %}">Отмена</a>-->
