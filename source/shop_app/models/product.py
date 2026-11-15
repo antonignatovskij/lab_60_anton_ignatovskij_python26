@@ -8,6 +8,7 @@ class Product(models.Model):
     created_at = models.DateTimeField(auto_now_add=True)
     cost = models.DecimalField(max_digits=7, decimal_places=2)
     image = models.CharField(null=False, blank=False)
+    balance = models.IntegerField(null=False, blank=False)
 
     def __str__(self):
         return f'product:{self.pk} - {self.name}'

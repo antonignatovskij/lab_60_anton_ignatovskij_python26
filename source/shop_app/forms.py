@@ -1,5 +1,4 @@
 from django import forms
-
 from shop_app.models import Category
 
 
@@ -41,6 +40,14 @@ class ProductForm(forms.Form):
         widget=forms.TextInput(attrs={'class': 'form-control'})
     )
 
+    balance = forms.IntegerField(
+        min_value=0,
+        required=True,
+        label='Колличество',
+        widget=forms.NumberInput(attrs={'class': 'form-control'})
+    )
+
+
 
 class CategoryForm(forms.Form):
     name = forms.CharField(
@@ -55,5 +62,15 @@ class CategoryForm(forms.Form):
         required=False,
         label='Описание категории',
         widget=forms.Textarea(attrs={'class': 'form-control', 'rows': '5', 'cols': '50'})
+    )
+
+
+
+class SearchForm(forms.Form):
+    name = forms.CharField(
+        max_length=100,
+        required=True,
+        label='Поиск по названию',
+        widget=forms.SearchInput(attrs={'class': 'form-control', 'placeholder': 'Введите название товара'}),
     )
 

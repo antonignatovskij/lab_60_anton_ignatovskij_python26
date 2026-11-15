@@ -1,8 +1,17 @@
 {% extends "base.html" %}
 
 {% block content %}
+    <form method="get" class="card border-0 shadow-sm p-3 mb-4" role="search">
+        <label for="{{ search_form.name.id_for_label }}" class="form-label">{{ search_form.name.label }}</label>
+        <div class="input-group">
+            {{ search_form.name }}
+            <button type="submit" class="btn btn-danger">Найти</button>
+            <a href="{% url 'product_list' %}" class="btn btn-outline-secondary">Сбросить</a>
+        </div>
+    </form>
+
 <div class="d-flex flex-wrap justify-content-between align-items-center gap-3 mb-4">
-    <h1 class="h3 mb-0">Каталог товаров</h1>
+    <h1 class="h3 mb-0">{{ title }}</h1>
 </div>
 
 <div class="row g-4">
@@ -10,12 +19,13 @@
     <div class="col-sm-6 col-lg-4">
         <article class="card h-100 border-0 rounded-3 shadow-sm">
             <a class="text-reset text-decoration-none" href="{% url 'product_detail' product.pk %}">
-                <img src="{{ product.image }}" alt="{{ product.name }}" height="220"
-                     class="card-img-top object-fit-contain p-3" loading="lazy">
+                <img alt="{{ product.name }}" class="card-img-top object-fit-contain p-3" height="220"
+                     loading="lazy" src="{{ product.image }}">
                 <div class="card-body">
-                    <p class="badge bg-primary">{{ product.category.name }}</p>
-                    <h2 class="h5 text-break">{{ product.name }}</h2>
-                    <p class="h4 mb-0">{{ product.cost }}</p>
+                    <a href="{% url 'product_category_filter' product.category.name %}" class="badge bg-primary">{{ product.category.name }}</a>
+                    <h5 class="h3">{{ product.name }}</h5>
+                    <p class="h5 mb-0 pt-3">{{ product.cost }} сом</p>
+                    <h5 class="text-muted">осталось: <span class="text-black">{{ product.balance }}</span> штук</h5>
                 </div>
             </a>
             <div class="p-3 mt-auto">
