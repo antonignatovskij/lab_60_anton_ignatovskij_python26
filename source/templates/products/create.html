@@ -5,15 +5,15 @@
 {% endblock %}
 
 {% block content %}
-    <div class="card p-3 rounded-3">
+    <div class="card p-5 rounded-5">
         {% include 'partial/product_form.html' %}
-        <div class="d-flex flex-wrap gap-2 border-top pt-3 mt-3">
-            <button type="submit" form="product-form" class="btn btn-primary">Создать товар</button>
-            <a href="{% url 'product_list' %}" class="btn btn-secondary">Назад</a>
+        <div class="d-flex flex-wrap gap-3 border-top pt-5 mt-5">
+            <button type="submit" form="product-form" class="btn-solid theme-primary">Создать товар</button>
+            <a href="{% url 'product_list' %}" class="btn-solid theme-secondary">Назад</a>
         </div>
     </div>
 
 {% endblock %}
 
 
-<!--            <a class="btn btn-outline-secondary btn-sm" href="{% url 'projects_detail' project.pk %}">Отмена</a>-->
+<!--            <a class="btn-outline theme-secondary btn-sm" href="{% url 'projects_detail' project.pk %}">Отмена</a>-->

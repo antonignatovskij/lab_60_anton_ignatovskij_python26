@@ -2,12 +2,12 @@
 
 {% block content %}
     <div class="row justify-content-center">
-        <div class="card border-0 shadow-sm p-4 col-md-8 col-lg-6">
-            <h1 class="h4 mb-3 text-danger">Внимание! Удаление категории удалит все продукты которые есть в этой категории!!!</h1>
+        <div class="card border-0 shadow-sm p-7 md:col-8 lg:col-6">
+            <h1 class="h4 mb-5 fg-danger">Внимание! Удаление категории удалит все продукты которые есть в этой категории!!!</h1>
             {% include 'partial/delete_form.html' %}
-            <div class="d-flex flex-wrap gap-2 mt-2">
-                <a href="{% url 'category_list' %}" class="btn btn-outline-secondary">Отмена</a>
-                <button type="submit" form="delete-form" class="btn btn-danger">Удалить категорию</button>
+            <div class="d-flex flex-wrap gap-3 mt-3">
+                <a href="{% url 'category_list' %}" class="btn-outline theme-secondary">Отмена</a>
+                <button type="submit" form="delete-form" class="btn-solid theme-danger">Удалить категорию</button>
             </div>
         </div>
     </div>

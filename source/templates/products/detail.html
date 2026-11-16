@@ -1,30 +1,30 @@
 {% extends "base.html" %}
 
 {% block content %}
-    <a href="{% url 'product_list' %}" class="btn btn-outline-secondary mb-4">Назад к каталогу</a>
+    <a href="{% url 'product_list' %}" class="btn-outline theme-secondary mb-7">Назад к каталогу</a>
 
-    <article class="card border-0 rounded-4 shadow-sm overflow-hidden">
+    <article class="card border-0 rounded-9 shadow-sm overflow-hidden">
         <div class="row g-0">
-            <div class="col-md-6 bg-body-tertiary p-4">
+            <div class="md:col-6 bg-1 p-7">
                 {% if product.image %}
                     <img src="{{ product.image }}" alt="{{ product.name }}"
                          class="w-100 object-fit-contain" height="360">
                 {% else %}
-                    <p class="text-muted text-center py-5">Нет изображения</p>
+                    <p class="fg-secondary text-center py-12">Нет изображения</p>
                 {% endif %}
             </div>
 
-            <div class="col-md-6 p-4 p-lg-5">
-                <a href="{% url 'product_category_filter' product.category.name %}" class="badge text-bg-primary text-wrap mb-3">{{ product.category.name }}</a>
-                <h1 class="h2 text-break mb-3">{{ product.name }}</h1>
-                <p class="fs-3 fw-semibold mb-4">Цена: {{ product.cost }}</p>
+            <div class="md:col-6 p-7 lg:p-12">
+                <a href="{% url 'product_category_filter' product.category.name %}" class="badge theme-primary text-wrap mb-5">{{ product.category.name }}</a>
+                <h1 class="h2 text-break mb-5">{{ product.name }}</h1>
+                <p class="fs-2xl fw-semibold mb-7">Цена: {{ product.cost }}</p>
 
                 <h2 class="h6">Описание</h2>
-                <p class="text-secondary text-break mb-4">{{ product.description|default:"Описание пока не добавлено."|linebreaksbr }}</p>
-                <p class="border-top pt-3 small text-muted">Добавлено: {{ product.created_at|date:"d.m.Y H:i" }}</p>
-                <div class="d-flex flex-wrap gap-2">
-                    <a class="btn btn-sm btn-outline-secondary" href="{% url 'product_update' product.pk %}">Редактировать</a>
-                    <a class="btn btn-sm btn-outline-danger" href="{% url 'product_delete' product.pk %}">Удалить</a>
+                <p class="fg-secondary text-break mb-7">{{ product.description|default:"Описание пока не добавлено."|linebreaksbr }}</p>
+                <p class="border-top pt-5 small fg-secondary">Добавлено: {{ product.created_at|date:"d.m.Y H:i" }}</p>
+                <div class="d-flex flex-wrap gap-3">
+                    <a class="btn-sm btn-outline theme-secondary" href="{% url 'product_update' product.pk %}">Редактировать</a>
+                    <a class="btn-sm btn-outline theme-danger" href="{% url 'product_delete' product.pk %}">Удалить</a>
                 </div>
             </div>
         </div>

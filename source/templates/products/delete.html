@@ -2,12 +2,12 @@
 
 {% block content %}
     <div class="row justify-content-center">
-        <div class="card border-0 shadow-sm p-4 col-md-8 col-lg-6">
-            <h1 class="h4 mb-3">Удалить товар?</h1>
+        <div class="card border-0 shadow-sm p-7 md:col-8 lg:col-6">
+            <h1 class="h4 mb-5">Удалить товар?</h1>
             {% include 'partial/delete_form.html' %}
-            <div class="d-flex flex-wrap gap-2 mt-2">
-                <a href="{% url 'product_detail' object.pk %}" class="btn btn-outline-secondary">Отмена</a>
-                <button type="submit" form="delete-form" class="btn btn-danger">Удалить товар</button>
+            <div class="d-flex flex-wrap gap-3 mt-3">
+                <a href="{% url 'product_detail' object.pk %}" class="btn-outline theme-secondary">Отмена</a>
+                <button type="submit" form="delete-form" class="btn-solid theme-danger">Удалить товар</button>
             </div>
         </div>
     </div>
