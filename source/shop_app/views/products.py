@@ -59,6 +59,12 @@ class ProductDetailView(DetailView):
     model = Product
     queryset = Product.objects.filter(balance__gte=1)
 
+    def get_context_data(self, **kwargs: Any):
+        context = super().get_context_data(**kwargs)
+        context['cart_form'] = CartForm()
+        return context
+
+
 class ProductCreateView(CreateView):
     template_name = 'products/create.html'
     model = Product

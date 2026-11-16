@@ -10,7 +10,7 @@
 <div class="row g-7">
     {% for product in products %}
     <div class="sm:col-6 lg:col-4">
-        <article class="card h-100 border-0 rounded-5 shadow-sm">
+        <article class="card h-100 border rounded-5 shadow-sm">
             <a class="fg-reset text-decoration-none" href="{% url 'product_detail' product.pk %}">
                 <img alt="{{ product.name }}" class="card-img-top object-fit-contain p-5" height="220"
                      loading="lazy" src="{{ product.image }}">
