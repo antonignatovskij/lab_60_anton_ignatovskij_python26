@@ -3,20 +3,6 @@ from django_bootstrap5 import widgets
 
 from shop_app.models import Product, Category
 
-class TestForm(forms.ModelForm):
-    def __init__(self, *args, **kwargs):
-        super().__init__(*args, **kwargs)
-
-    class Meta:
-        model = Product
-        fields = ['name', 'description', 'category', 'cost', 'image', 'balance']
-        widgets = {
-            'name': widgets.TextInput(attrs={'class': 'form-control'}),
-            'description': widgets.Textarea(attrs={'class': 'form-control', 'rows': '5', 'cols': '50'}),
-            'category': forms.Select(attrs={'class': 'form-control'}),
-            'cost': widgets.NumberInput()
-        }
-
 
 class ProductForm(forms.ModelForm):
     cost = forms.DecimalField(
