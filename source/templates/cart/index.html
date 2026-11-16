@@ -28,11 +28,17 @@
     {% empty %}
     <p class="fg-secondary py-12 text-center">Пока нет товаров в корзине. Добавьте первый!</p>
     {% endfor %}
-    <div class="card mb-10 border-0 rounded-5 shadow-sm">
-        <div class="card-body">
-            <h4><span class="fw-bold">Итого:</span> {{ total_sum }}</h4>
+    <div class="">
+        <div class="card mb-10 border-0 rounded-5 shadow-sm">
+            <div class="card-body">
+                <h4><span class="fw-bold">Итого:</span> {{ total_sum }}</h4>
+            </div>
         </div>
     </div>
+    <div class="">
+
+    </div>
+
 </div>
 
 {% endblock %}

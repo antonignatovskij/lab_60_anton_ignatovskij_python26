@@ -1,6 +1,6 @@
 from django import forms
 
-from shop_app.models import Product, Category, Cart
+from shop_app.models import Product, Category, Cart, Order
 
 
 class ProductForm(forms.ModelForm):
@@ -73,6 +73,11 @@ class CartForm(forms.ModelForm):
             raise forms.ValidationError('Incorrect amount')
         return total
 
+
+class OrderForm(forms.ModelForm):
+    class Meta:
+        model = Order
+        fields = ['full_name']
 
 
 class SearchForm(forms.Form):
