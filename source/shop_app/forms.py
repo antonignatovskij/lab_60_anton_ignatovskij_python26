@@ -1,7 +1,6 @@
 from django import forms
-from django_bootstrap5 import widgets
 
-from shop_app.models import Product, Category
+from shop_app.models import Product, Category, Cart
 
 
 class ProductForm(forms.ModelForm):
@@ -55,6 +54,26 @@ class CategoryForm(forms.ModelForm):
                 'cols': 50,
             }),
         }
+
+
+class CartForm(forms.ModelForm):
+    balance = forms.IntegerField(
+        min_value=1,
+        initial=1,
+        widget=forms.NumberInput(attrs={'class': 'form-control'}),
+    )
+
+    class Meta:
+        model = Cart
+        fields = ['balance']
+
+    def clean_balance(self):
+        total = self.instance.balance + self.cleaned_data['balance']
+        if total > self.instance.product.balance:
+            raise forms.ValidationError('Incorrect amount')
+        self.instance.product.balance -= total
+        self.instance.product.save()
+        return total
 
 
 

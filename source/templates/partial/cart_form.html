@@ -1,0 +1,19 @@
+<form action="{% url 'cart_product_add' product.pk %}" id="cart-form-{{ product.pk }}" method="post">
+    {% csrf_token %}
+    <input type="hidden" name="from_page" value="{{ request.get_full_path }}">
+    <div class="row g-3 align-items-center">
+        <div class="col-4">
+            {% for field in cart_form %}
+                {{ field }}
+            {% endfor %}
+        </div>
+        <div class="col">
+            <button type="submit" class="btn-outline theme-success w-100">В корзину</button>
+        </div>
+    </div>
+    {% if message %}
+        <div class="alert mt-3 mb-0 theme-primary">
+            {{ message }}
+        </div>
+    {% endif %}
+</form>

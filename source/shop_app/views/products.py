@@ -4,7 +4,7 @@ from django.db.models import Q
 from django.views.generic import ListView, DetailView, CreateView, UpdateView, DeleteView
 from django.urls import reverse, reverse_lazy
 
-from shop_app.forms import ProductForm, SearchForm
+from shop_app.forms import ProductForm, SearchForm, CartForm
 from shop_app.models import Product
 
 
@@ -32,6 +32,7 @@ class ProductListView(ListView):
     def get_context_data(self, **kwargs: Any):
         context = super().get_context_data(**kwargs)
         context['search_form'] = self.form
+        context['cart_form'] = CartForm()
         context['title'] = self.title
         return context
 

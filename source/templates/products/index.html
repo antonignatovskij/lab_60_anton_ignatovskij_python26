@@ -29,9 +29,14 @@
                     <a class="btn-sm btn-outline theme-danger" href="{% url 'product_delete' product.pk %}">Удалить</a>
                 </div>
             </div>
+            <div class="card-footer px-5">
+
+                {% include 'partial/cart_form.html' %}
+            </div>
         </article>
     </div>
     {% empty %}
+
     <p class="fg-secondary py-12 text-center">Пока нет товаров. Добавьте первый!</p>
     {% endfor %}
 </div>

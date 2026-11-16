@@ -26,6 +26,17 @@
                     <a class="btn-sm btn-outline theme-secondary" href="{% url 'product_update' product.pk %}">Редактировать</a>
                     <a class="btn-sm btn-outline theme-danger" href="{% url 'product_delete' product.pk %}">Удалить</a>
                 </div>
+                <hr>
+                <div class="mt-5">
+                    <div class="row align-items-center">
+                        <div class="col col-4">
+                            <input type="number" class="form-control" name="how_much" value="1" min="1">
+                        </div>
+                        <div class="col">
+                            <a href="" class="btn btn-outline theme-success w-100">добавить в корзину</a>
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>
     </article>
