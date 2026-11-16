@@ -12,6 +12,8 @@ from shop_app.views import (
     CategoryDeleteView,
 
     CartProductView,
+    CartListView,
+    CartItemDeleteView,
 )
 
 urlpatterns = [
@@ -24,6 +26,8 @@ urlpatterns = [
     path('product/<str:category>/', ProductListView.as_view(), name='product_category_filter'),
 
     path('cart/product/<int:pk>/add', CartProductView.as_view(), name='cart_product_add'),
+    path('cart/',CartListView.as_view(), name='cart_list'),
+    path('cart/<int:pk>/delete', CartItemDeleteView.as_view(), name='cart_item_delete'),
 
     path('categories/', CategoriesView.as_view(), name='category_list'),
     path('categories/add', CategoryCreateView.as_view(), name='category_create'),

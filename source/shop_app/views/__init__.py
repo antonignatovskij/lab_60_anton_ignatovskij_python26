@@ -14,5 +14,7 @@ from shop_app.views.categories import (
 )
 
 from shop_app.views.cart_views import (
-    CartProductView
+    CartProductView,
+    CartListView,
+    CartItemDeleteView,
 )
