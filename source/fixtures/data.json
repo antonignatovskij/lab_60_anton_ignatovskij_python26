@@ -24,6 +24,14 @@
   }
 },
 {
+  "model": "shop_app.category",
+  "pk": 8,
+  "fields": {
+    "name": "Кондитерские изделия",
+    "description": "Сладкие, калорийные десерты"
+  }
+},
+{
   "model": "shop_app.product",
   "pk": 10,
   "fields": {
@@ -111,6 +119,58 @@
     "created_at": "2026-11-15T19:39:06.735Z",
     "cost": "123.00",
     "image": "https://apeti.ru/upload/resize_cache/iblock/093/0k7pv99w4e5je9mqpex030yul51nh1o4/218_218_0/khleb_izmaylovskiy.jpg",
+    "balance": 0
+  }
+},
+{
+  "model": "shop_app.product",
+  "pk": 17,
+  "fields": {
+    "name": "Конфеты",
+    "description": "Рахат компании",
+    "category": 8,
+    "created_at": "2026-11-16T17:15:21.238Z",
+    "cost": "220.00",
+    "image": "https://avatars.mds.yandex.net/get-grocery-goods-b2b/10241750/bb67284d-fde8-4c8d-9aed-c34075b7d2b6/300x300?webp=true",
+    "balance": 21
+  }
+},
+{
+  "model": "shop_app.product",
+  "pk": 18,
+  "fields": {
+    "name": "Круассан",
+    "description": "Со сгущенкой",
+    "category": 8,
+    "created_at": "2026-11-16T17:16:25.636Z",
+    "cost": "451.89",
+    "image": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTiDOfU-Aask1ZOFR20-rk8RV-PUi6brDeHNJFj6JxLCg&s=10",
+    "balance": 5
+  }
+},
+{
+  "model": "shop_app.product",
+  "pk": 19,
+  "fields": {
+    "name": "Лук",
+    "description": "Репчатый",
+    "category": 7,
+    "created_at": "2026-11-16T17:17:11.346Z",
+    "cost": "45.20",
+    "image": "https://opis-cdn.tinkoffjournal.ru/mercury/onion-types-01.lgzvcgo7xcwi..png",
+    "balance": 65
+  }
+},
+{
+  "model": "shop_app.product",
+  "pk": 20,
+  "fields": {
+    "name": "not in querry",
+    "description": "",
+    "category": 2,
+    "created_at": "2026-11-16T17:32:22.517Z",
+    "cost": "12.00",
+    "image": "https://1xleb.ru/catalog/rzhano_pshenichnye_zavarnye/khleb_galitskiy_290_g_narezannyy/",
     "balance": 0
   }
 },
