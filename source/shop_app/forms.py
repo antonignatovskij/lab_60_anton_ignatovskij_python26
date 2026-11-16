@@ -71,8 +71,6 @@ class CartForm(forms.ModelForm):
         total = self.instance.balance + self.cleaned_data['balance']
         if total > self.instance.product.balance:
             raise forms.ValidationError('Incorrect amount')
-        self.instance.product.balance -= total
-        self.instance.product.save()
         return total
 
 
