@@ -1,11 +1,11 @@
 {% extends "base.html" %}
 
 {% block content %}
-    <a href="{% url 'category_list' %}" class="btn btn-outline-secondary mb-4">Вернуться к категориям</a>
-    <div class="card p-3 rounded-3">
+    <a href="{% url 'category_list' %}" class="btn-outline theme-secondary mb-7">Вернуться к категориям</a>
+    <div class="card p-5 rounded-5">
         {% include 'partial/product_form.html' %}
-        <div class="d-flex flex-wrap gap-2 border-top pt-3 mt-3">
-            <button type="submit" form="product-form" class="btn btn-primary">Сохранить</button>
+        <div class="d-flex flex-wrap gap-3 border-top pt-5 mt-5">
+            <button type="submit" form="product-form" class="btn-solid theme-primary">Сохранить</button>
         </div>
     </div>
 

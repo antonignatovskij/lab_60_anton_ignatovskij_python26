@@ -1,65 +1,27 @@
-from django.shortcuts import redirect, get_object_or_404
-from django.views.generic import TemplateView
+from django.urls import reverse, reverse_lazy
+from django.views.generic import ListView, CreateView, UpdateView, DeleteView
 
 from shop_app.models import Category
 from shop_app.forms import CategoryForm
 
-class CategoriesView(TemplateView):
+class CategoriesView(ListView):
     template_name = 'categories/index.html'
+    model = Category
+    context_object_name = 'categories'
 
-    def get_context_data(self, **kwargs):
-        context = super().get_context_data(**kwargs)
-        context['categories'] = Category.objects.all()
-        return context
-
-class CategoryCreateView(TemplateView):
+class CategoryCreateView(CreateView):
     template_name = 'categories/create.html'
+    form_class = CategoryForm
+    model = Category
+    success_url = reverse_lazy('category_list')
 
-    def get_context_data(self, **kwargs):
-        kwargs['form'] = CategoryForm()
-        return super().get_context_data(**kwargs)
-
-    def post(self, request, *args, **kwargs):
-        form = CategoryForm(request.POST)
-        if form.is_valid():
-            data = form.cleaned_data
-            Category.objects.create(**data)
-            return redirect('category_list')
-        context = {'form': form}
-        return self.render_to_response(context)
-
-class CategoryUpdateView(TemplateView):
+class CategoryUpdateView(UpdateView):
     template_name = 'categories/update.html'
+    form_class = CategoryForm
+    model = Category
+    success_url = reverse_lazy('category_list')
 
-    def get_context_data(self, **kwargs):
-        context = super().get_context_data(**kwargs)
-        category = get_object_or_404(Category, pk=context['pk'])
-        context['form'] = CategoryForm(initial={
-            'name': category.name,
-            'description': category.description,
-        })
-        return context
-
-    def post(self, request, *args, **kwargs):
-        form = CategoryForm(request.POST)
-        if form.is_valid():
-            data = form.cleaned_data
-            category = get_object_or_404(Category, pk=kwargs['pk'])
-            category.name = data['name']
-            category.description = data['description']
-            category.save()
-            return redirect('category_list')
-        context = {'form': form}
-        return self.render_to_response(context)
-
-class CategoryDeleteView(TemplateView):
+class CategoryDeleteView(DeleteView):
     template_name = 'categories/delete.html'
-
-    def get_context_data(self, **kwargs):
-        kwargs['object'] = get_object_or_404(Category, pk=kwargs['pk'])
-        return super().get_context_data(**kwargs)
-
-    def post(self, request, *args, **kwargs):
-        product = get_object_or_404(Category, pk=kwargs['pk'])
-        product.delete()
-        return redirect('category_list')
+    model = Category
+    success_url = reverse_lazy('category_list')

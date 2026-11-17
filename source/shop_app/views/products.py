@@ -1,103 +1,90 @@
 from typing import Any
 
-from django.shortcuts import get_object_or_404, redirect, render
-from django.views.generic import TemplateView
+from django.db.models import Q
+from django.views.generic import ListView, DetailView, CreateView, UpdateView, DeleteView
+from django.urls import reverse, reverse_lazy
 
-from shop_app.forms import ProductForm, SearchForm
-from shop_app.models import Product, Category
-
-
-def product_list(request, category: None = None):
-    products = Product.objects.all().filter(balance__gte=1)
-    form = SearchForm(request.GET)
-    title = 'Каталог товаров'
-    if form.is_valid():
-        data = form.cleaned_data
-        products = Product.objects.filter(name__icontains=data['name'])
-        title = f'Результаты поиска товаров с названием, содержащим: {data["name"]}'
-        if category is not None:
-            products = Product.objects.filter(category__name=category).filter(name__icontains=data['name'])
-            title = f'Поиск в категории: {category}'
-        return render(request, 'products/index.html', {'products': products, 'search_form': form, 'title': title})
-
-    if category is not None:
-        category = Category.objects.get(name=category)
-        products = Product.objects.filter(category=category.pk).order_by('name')
-        title = category.name
-        return render(request, 'products/index.html', {'products': products, 'search_form': form, 'title': title})
-
-    return render(request, 'products/index.html', {'products': products, 'search_form': form, 'title': title})
+from shop_app.forms import ProductForm, SearchForm, CartForm
+from shop_app.models import Product
 
 
-class ProductDetailView(TemplateView):
-    template_name = 'products/detail.html'
+class ProductListView(ListView):
+    template_name = 'products/index.html'
+    context_object_name = 'products'
+    model = Product
+    paginate_by = 6
+    paginate_orphans = 2
+    ordering = ['category__name', 'name']
 
-    def get_context_data(self, **kwargs):
-        kwargs['product'] = get_object_or_404(Product, pk=kwargs['pk'])
-        return super().get_context_data(**kwargs)
+    def get_search_form(self):
+        return SearchForm(self.request.GET)
 
+    def get_search_value(self):
+        if self.form.is_valid():
+            return self.form.cleaned_data['search']
+        return None
 
-class ProductCreateView(TemplateView):
-    template_name = 'products/create.html'
+    def get(self, request, *args, **kwargs):
+        self.form = self.get_search_form()
+        self.search_value = self.get_search_value()
+        return super().get(request, *args, **kwargs)
 
     def get_context_data(self, **kwargs: Any):
-        context = super().get_context_data()
-        context['form'] = ProductForm()
-        return context
-
-    def post(self, request, *args, **kwargs):
-        form = ProductForm(request.POST)
-        if form.is_valid():
-            data = form.cleaned_data
-            product = Product.objects.create(**data)
-            return redirect('product_detail', pk=product.pk)
-        context = {'form': form}
-        return self.render_to_response(context)
-
-class ProductUpdateView(TemplateView):
-    template_name = 'products/update.html'
-
-    def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
-        product = get_object_or_404(Product, pk=context['pk'])
-        context['form'] = ProductForm(initial={
-            'name': product.name,
-            'description': product.description,
-            'category': product.category,
-            'cost': product.cost,
-            'image': product.image,
-            'balance': product.balance,
-        })
+        context['search_form'] = self.form
+        context['cart_form'] = CartForm()
+        context['title'] = self.title
         return context
 
-    def post(self, request, *args, **kwargs):
-        form = ProductForm(request.POST)
-        if form.is_valid():
-            data = form.cleaned_data
-            product = get_object_or_404(Product, pk=kwargs['pk'])
-            product.name = data['name']
-            product.description = data['description']
-            product.category = data['category']
-            product.cost = data['cost']
-            product.image = data['image']
-            product.balance = data['balance']
-            product.save()
-            return redirect('product_detail', pk=product.pk)
-        context = {'form': form}
-        return self.render_to_response(context)
+    def get_queryset(self):
+        queryset = super().get_queryset()
+        queryset = queryset.filter(balance__gte=1)
+        self.title = 'Каталог товаров'
+        if self.search_value:
+            query = Q(name__icontains=self.search_value)
+            self.title = f'Поиск товара по: {self.search_value}'
+            if self.kwargs.get('category') is not None:
+                self.title = f'Поиск товара в категории {self.kwargs.get('category')} по: {self.search_value}'
+                query = Q(category__name=self.kwargs.get('category')) & Q(name__icontains=self.search_value)
+            queryset = queryset.filter(query)
+        if self.kwargs.get('category') is not None:
+            self.title = f'Категория: {self.kwargs.get('category')}'
+            query = Q(category__name=self.kwargs.get('category'))
+            queryset = queryset.filter(query)
+        return queryset
 
-class ProductDeleteView(TemplateView):
+
+class ProductDetailView(DetailView):
+    template_name = 'products/detail.html'
+    model = Product
+    queryset = Product.objects.filter(balance__gte=1)
+
+    def get_context_data(self, **kwargs: Any):
+        context = super().get_context_data(**kwargs)
+        context['cart_form'] = CartForm()
+        return context
+
+
+class ProductCreateView(CreateView):
+    template_name = 'products/create.html'
+    model = Product
+    form_class = ProductForm
+
+    def get_success_url(self) -> str:
+        return reverse('product_detail', kwargs={'pk': self.object.pk})
+
+class ProductUpdateView(UpdateView):
+    template_name = 'products/update.html'
+    model = Product
+    form_class = ProductForm
+
+    def get_success_url(self) -> str:
+        return reverse('product_detail', kwargs={'pk': self.object.pk})
+
+class ProductDeleteView(DeleteView):
     model = Product
     template_name = 'products/delete.html'
-
-    def get_context_data(self, **kwargs):
-        kwargs['object'] = get_object_or_404(Product, pk=kwargs['pk'])
-        return super().get_context_data(**kwargs)
-
-    def post(self, request, *args, **kwargs):
-        product = get_object_or_404(Product, pk=kwargs['pk'])
-        product.delete()
-        return redirect('product_list')
+    success_url = reverse_lazy('product_list')
 
 
 

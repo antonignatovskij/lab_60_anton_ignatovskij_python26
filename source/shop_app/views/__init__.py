@@ -3,7 +3,7 @@ from shop_app.views.products import (
     ProductCreateView,
     ProductUpdateView,
     ProductDeleteView,
-    product_list
+    ProductListView,
 )
 
 from shop_app.views.categories import (
@@ -11,4 +11,14 @@ from shop_app.views.categories import (
     CategoryCreateView,
     CategoryUpdateView,
     CategoryDeleteView
+)
+
+from shop_app.views.cart_views import (
+    CartProductView,
+    CartListView,
+    CartItemDeleteView,
+)
+
+from shop_app.views.order_views import (
+    OrderSaveView
 )

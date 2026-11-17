@@ -1,5 +1,5 @@
-<form method="post" class="border-0 shadow-sm p-4" id="delete-form">
+<form method="post" class="border-0 shadow-sm p-7" id="delete-form">
     {% csrf_token %}
-    <p class="text-muted">Вы собираетесь удалить: <span class="fw-semibold text-break">{{ object.name|slice:":25" }}</span> </p>
-    <p class="small text-muted">Это действие нельзя отменить.</p>
+    <p class="fg-secondary">Вы собираетесь удалить: <span class="fw-semibold text-break">{{ object.name|slice:":25" }}</span> </p>
+    <p class="small fg-secondary">Это действие нельзя отменить.</p>
 </form>

@@ -1,4 +1,4 @@
-<form action="" id="product-form" method="POST">
+<form action="{% if action %}{% url action %}{% endif %}" id="product-form" method="POST">
 
     {% csrf_token %}
 
@@ -7,9 +7,9 @@
     {% endfor %}
 
     {% for field in form %}
-    <p><label class="text-secondary" for="{{ field.id_for_label }}">{{ field.label }}</label></p>
+    <p><label class="fg-secondary" for="{{ field.id_for_label }}">{{ field.label }}</label></p>
     {% for error in field.errors %}
-    <p class="form-error text-danger">{{ error }}</p>
+    <p class="form-error fg-danger">{{ error }}</p>
     {% endfor %}
     <p class="">{{ field }}</p>
     {% endfor %}

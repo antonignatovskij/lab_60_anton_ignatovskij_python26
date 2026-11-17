@@ -1,45 +1,48 @@
 {% extends "base.html" %}
 
 {% block content %}
-    <form method="get" class="card border-0 shadow-sm p-3 mb-4" role="search">
-        <label for="{{ search_form.name.id_for_label }}" class="form-label">{{ search_form.name.label }}</label>
-        <div class="input-group">
-            {{ search_form.name }}
-            <button type="submit" class="btn btn-danger">Найти</button>
-            <a href="{% url 'product_list' %}" class="btn btn-outline-secondary">Сбросить</a>
-        </div>
-    </form>
+{% include 'partial/search_form.html' %}
 
-<div class="d-flex flex-wrap justify-content-between align-items-center gap-3 mb-4">
+<div class="d-flex flex-wrap justify-content-between align-items-center gap-5 mb-7">
     <h1 class="h3 mb-0">{{ title }}</h1>
 </div>
 
-<div class="row g-4">
+<div class="row g-7">
     {% for product in products %}
-    <div class="col-sm-6 col-lg-4">
-        <article class="card h-100 border-0 rounded-3 shadow-sm">
-            <a class="text-reset text-decoration-none" href="{% url 'product_detail' product.pk %}">
-                <img alt="{{ product.name }}" class="card-img-top object-fit-contain p-3" height="220"
+    <div class="sm:col-6 lg:col-4">
+        <article class="card h-100 border rounded-5 shadow-sm">
+            <a class="fg-reset text-decoration-none" href="{% url 'product_detail' product.pk %}">
+                <img alt="{{ product.name }}" class="card-img-top object-fit-contain p-5" height="220"
                      loading="lazy" src="{{ product.image }}">
-                <div class="card-body">
-                    <a href="{% url 'product_category_filter' product.category.name %}" class="badge bg-primary">{{ product.category.name }}</a>
-                    <h5 class="h3">{{ product.name }}</h5>
-                    <p class="h5 mb-0 pt-3">{{ product.cost }} сом</p>
-                    <h5 class="text-muted">осталось: <span class="text-black">{{ product.balance }}</span> штук</h5>
-                </div>
             </a>
-            <div class="p-3 mt-auto">
-                <small class="d-block text-muted mb-2">{{ product.created_at|date:"d.m.Y" }}</small>
-                <div class="d-flex flex-wrap gap-2">
-                    <a class="btn btn-sm btn-outline-primary" href="{% url 'product_detail' product.pk %}">Подробнее</a>
-                    <a class="btn btn-sm btn-outline-secondary" href="{% url 'product_update' product.pk %}">Редактировать</a>
-                    <a class="btn btn-sm btn-outline-danger" href="{% url 'product_delete' product.pk %}">Удалить</a>
+            <div class="card-body">
+                <a href="{% url 'product_category_filter' product.category.name %}" class="badge theme-primary align-self-start">{{ product.category.name }}</a>
+                <h5 class="h3"><a class="fg-reset text-decoration-none" href="{% url 'product_detail' product.pk %}">{{ product.name }}</a></h5>
+                <p class="h5 mb-0 pt-5">{{ product.cost }} сом</p>
+                <h5 class="fg-secondary">осталось: <span class="fg-black">{{ product.balance }}</span> штук</h5>
+            </div>
+            <div class="p-5 mt-auto">
+                <small class="d-block fg-secondary mb-3">{{ product.created_at }}</small>
+                <div class="d-flex flex-wrap gap-3">
+                    <a class="btn-sm btn-outline theme-primary" href="{% url 'product_detail' product.pk %}">Подробнее</a>
+                    <a class="btn-sm btn-outline theme-secondary" href="{% url 'product_update' product.pk %}">Редактировать</a>
+                    <a class="btn-sm btn-outline theme-danger" href="{% url 'product_delete' product.pk %}">Удалить</a>
                 </div>
+            </div>
+            <div class="card-footer px-5">
+
+                {% include 'partial/cart_form.html' %}
             </div>
         </article>
     </div>
     {% empty %}
-    <p class="text-muted py-5 text-center">Пока нет товаров. Добавьте первый!</p>
+
+    <p class="fg-secondary py-12 text-center">Пока нет товаров. Добавьте первый!</p>
     {% endfor %}
+</div>
+<div class="mt-10">
+    {% if is_paginated %}
+        {% include 'partial/pagination.html' %}
+    {% endif %}
 </div>
 {% endblock %}
