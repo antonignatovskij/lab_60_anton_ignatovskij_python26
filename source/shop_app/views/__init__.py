@@ -18,3 +18,7 @@ from shop_app.views.cart_views import (
     CartListView,
     CartItemDeleteView,
 )
+
+from shop_app.views.order_views import (
+    OrderSaveView
+)

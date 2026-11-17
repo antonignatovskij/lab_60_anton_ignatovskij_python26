@@ -2,7 +2,7 @@ from django.http import Http404
 from django.shortcuts import redirect
 from django.views.generic import View, ListView
 from shop_app.models import Cart, Product
-from shop_app.forms import CartForm
+from shop_app.forms import CartForm, OrderForm
 
 
 class CartProductView(View):
@@ -36,6 +36,7 @@ class CartListView(ListView):
         for item in context['cart']:
             item.total_price = item.balance * item.product.cost
         context['total_sum'] = sum(item.total_price for item in context['cart'])
+        context['form'] = OrderForm()
         return context
 
 class CartItemDeleteView(View):

@@ -175,27 +175,78 @@
   }
 },
 {
-  "model": "shop_app.cart",
+  "model": "shop_app.orderitem",
+  "pk": 1,
+  "fields": {
+    "order": 1,
+    "product": 15,
+    "quantity": 5
+  }
+},
+{
+  "model": "shop_app.orderitem",
+  "pk": 2,
+  "fields": {
+    "order": 1,
+    "product": 18,
+    "quantity": 5
+  }
+},
+{
+  "model": "shop_app.orderitem",
+  "pk": 3,
+  "fields": {
+    "order": 1,
+    "product": 10,
+    "quantity": 5
+  }
+},
+{
+  "model": "shop_app.orderitem",
   "pk": 4,
   "fields": {
-    "product": 15,
-    "balance": 5
-  }
-},
-{
-  "model": "shop_app.cart",
-  "pk": 6,
-  "fields": {
-    "product": 18,
-    "balance": 5
-  }
-},
-{
-  "model": "shop_app.cart",
-  "pk": 7,
-  "fields": {
+    "order": 2,
     "product": 10,
-    "balance": 5
+    "quantity": 1
+  }
+},
+{
+  "model": "shop_app.orderitem",
+  "pk": 5,
+  "fields": {
+    "order": 3,
+    "product": 17,
+    "quantity": 2
+  }
+},
+{
+  "model": "shop_app.order",
+  "pk": 1,
+  "fields": {
+    "full_name": "Антон Стимовский",
+    "mobile_phone": "+996550312060",
+    "address": "Тыныстанова",
+    "created_at": "2026-11-17T00:01:20.189Z"
+  }
+},
+{
+  "model": "shop_app.order",
+  "pk": 2,
+  "fields": {
+    "full_name": "Антон Стимовский",
+    "mobile_phone": "sadsdasd",
+    "address": "Тыныстанова",
+    "created_at": "2026-11-17T00:09:43.445Z"
+  }
+},
+{
+  "model": "shop_app.order",
+  "pk": 3,
+  "fields": {
+    "full_name": "Антон Стимовский",
+    "mobile_phone": "wasffasfwafs",
+    "address": "Тыныстанова",
+    "created_at": "2026-11-17T00:11:11.027Z"
   }
 },
 {
